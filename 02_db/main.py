@@ -95,3 +95,4 @@ def delete_memo(item_id:int, db:Session=Depends(get_db)):
     return{
         "message":"메모를 삭제했습니다."
     }
+
