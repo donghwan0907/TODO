@@ -1,0 +1,141 @@
+{% extends "base.html" %} {% block title %}메모장 | 투두리스트{% endblock %} {%
+block contents %}
+<div class="min-h-screen bg-slate-50 px-4 py-10 sm:px-6 lg:px-8">
+  <div class="mx-auto flex max-w-6xl flex-col gap-6">
+    <header
+      class="flex flex-wrap items-center justify-between rounded-[1.5rem] border border-slate-200 bg-white p-5 shadow-sm"
+    >
+      <div class="flex items-center gap-3">
+        <div
+          class="flex h-11 w-11 items-center justify-center rounded-full bg-slate-900 text-sm font-bold text-white shadow-sm"
+        >
+          T
+        </div>
+        <div>
+          <p
+            class="text-sm font-semibold uppercase tracking-[0.35em] text-sky-600"
+          >
+            TODO LIST
+          </p>
+          <h1 class="mt-2 text-2xl font-bold text-slate-900">
+            {{ username }}님의 메모장
+          </h1>
+          <p class="mt-1 text-sm text-slate-500">
+            오늘의 목표를 기록하고 관리해보세요.
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <a
+          href="/"
+          class="rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-sky-400 hover:text-sky-600"
+          >홈으로</a
+        >
+        <a
+          href="/logout"
+          class="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+          >로그아웃</a
+        >
+      </div>
+    </header>
+
+    <section class="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+      <form
+        method="post"
+        action="/memos"
+        class="rounded-[1.5rem] border border-slate-200 bg-white p-6 shadow-sm"
+      >
+        <h2 class="text-xl font-semibold text-slate-900">새 메모 작성</h2>
+        <p class="mt-2 text-sm text-slate-500">
+          할 일과 메모를 바로 남겨보세요.
+        </p>
+
+        <div class="mt-5 space-y-4">
+          <div>
+            <label
+              for="title"
+              class="mb-2 block text-sm font-medium text-slate-700"
+              >제목</label
+            >
+            <input
+              id="title"
+              name="title"
+              type="text"
+              required
+              class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-100"
+              placeholder="예: 회의 준비"
+            />
+          </div>
+          <div>
+            <label
+              for="content"
+              class="mb-2 block text-sm font-medium text-slate-700"
+              >내용</label
+            >
+            <textarea
+              id="content"
+              name="content"
+              rows="5"
+              required
+              class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-100"
+              placeholder="메모 내용을 입력해주세요."
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="w-full rounded-2xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+          >
+            메모 저장
+          </button>
+        </div>
+      </form>
+
+      <div
+        class="rounded-[1.5rem] border border-slate-200 bg-white p-6 shadow-sm"
+      >
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-semibold text-slate-900">최근 메모</h2>
+            <p class="mt-1 text-sm text-slate-500">
+              저장된 메모를 확인할 수 있어요.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-6 space-y-4">
+          {% if memos %} {% for memo in memos %}
+          <article class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h3 class="text-base font-semibold text-slate-900">
+                  {{ memo.title }}
+                </h3>
+                <p
+                  class="mt-2 whitespace-pre-line text-sm leading-7 text-slate-600"
+                >
+                  {{ memo.content }}
+                </p>
+              </div>
+              <form method="post" action="/memos/{{ memo.id }}/delete">
+                <button
+                  type="submit"
+                  class="rounded-full border border-rose-200 px-3 py-1 text-xs font-semibold text-rose-600 transition hover:bg-rose-50"
+                >
+                  삭제
+                </button>
+              </form>
+            </div>
+          </article>
+          {% endfor %} {% else %}
+          <div
+            class="rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-6 text-center text-sm text-slate-500"
+          >
+            아직 메모가 없어요. 첫 메모를 작성해보세요.
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+{% endblock %}

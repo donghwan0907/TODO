@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Poor+Story&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Noto Sans KR", "sans-serif"],
+              display: ["Poor Story", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <title>{% block title %}투두리스트{% endblock %}</title>
+  </head>
+  <body class="min-h-screen bg-slate-50 font-sans text-slate-800">
+    <main class="min-h-screen">{% block contents %}{% endblock %}</main>
+  </body>
+</html>

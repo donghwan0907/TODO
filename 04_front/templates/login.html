@@ -1,0 +1,76 @@
+{% extends "base.html" %} {% block title %}로그인 | 투두리스트{% endblock %} {%
+block contents %}
+<div
+  class="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 via-sky-50 to-indigo-100 px-4 py-12 sm:px-6 lg:px-8"
+>
+  <div
+    class="w-full max-w-md rounded-[2rem] border border-slate-200 bg-white p-8 shadow-[0_25px_80px_-20px_rgba(15,23,42,0.35)] sm:p-10"
+  >
+    <p class="text-sm font-semibold uppercase tracking-[0.35em] text-sky-600">
+      TODO LIST
+    </p>
+    <h1 class="mt-3 text-2xl font-bold text-slate-900">로그인</h1>
+    <p class="mt-2 text-sm text-slate-500">
+      계속해서 오늘의 할 일을 관리해보세요.
+    </p>
+
+    {% if error %}
+    <div
+      class="mt-6 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-600"
+    >
+      {{ error }}
+    </div>
+    {% endif %}
+
+    <form class="mt-8 space-y-5" method="post" action="/login">
+      <div>
+        <label
+          for="username"
+          class="mb-2 block text-sm font-medium text-slate-700"
+          >아이디</label
+        >
+        <input
+          id="username"
+          name="username"
+          type="text"
+          required
+          class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-100"
+          placeholder="아이디를 입력해주세요"
+        />
+      </div>
+
+      <div>
+        <label
+          for="password"
+          class="mb-2 block text-sm font-medium text-slate-700"
+          >비밀번호</label
+        >
+        <input
+          id="password"
+          name="password"
+          type="password"
+          required
+          class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-100"
+          placeholder="비밀번호를 입력해주세요"
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="w-full rounded-2xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+      >
+        로그인하기
+      </button>
+    </form>
+
+    <p class="mt-6 text-center text-sm text-slate-500">
+      계정이 없나요?
+      <a
+        href="/signup"
+        class="ml-1 font-medium text-sky-600 transition hover:text-sky-700"
+        >회원가입</a
+      >
+    </p>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends "base.html" %} {% block title %}회원가입 | 투두리스트{% endblock %}
+{% block contents %}
+<div
+  class="min-h-screen bg-gradient-to-br from-slate-50 via-sky-50 to-indigo-100 px-4 py-12 sm:px-6 lg:px-8"
+>
+  <div
+    class="mx-auto flex max-w-6xl flex-col justify-center overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_25px_80px_-20px_rgba(15,23,42,0.35)] lg:flex-row"
+  >
+    <div
+      class="bg-gradient-to-br from-sky-600 via-violet-600 to-indigo-700 p-8 sm:p-10 lg:w-[46%] lg:p-12"
+    >
+      <p class="text-sm font-semibold uppercase tracking-[0.35em] text-sky-100">
+        TODO LIST
+      </p>
+      <h1 class="mt-4 text-3xl font-bold text-white sm:text-4xl">
+        당신의 일정을 한눈에
+      </h1>
+      <p class="mt-5 max-w-md text-sm leading-7 text-sky-100/90 sm:text-base">
+        회원가입하고 오늘의 할 일을 깔끔하게 관리해보세요. 작은 계획부터 큰
+        목표까지 차근차근 이어갈 수 있습니다.
+      </p>
+
+      <div
+        class="mt-10 rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-sm"
+      >
+        <p class="text-sm font-semibold text-white">지금 시작하면</p>
+        <ul class="mt-3 space-y-2 text-sm text-sky-50">
+          <li>• 일정과 메모를 한 곳에서 관리할 수 있어요.</li>
+          <li>• 매일의 목표를 시각적으로 확인할 수 있어요.</li>
+          <li>• 완료한 일도 자연스럽게 기록할 수 있어요.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="p-8 sm:p-10 lg:w-[54%] lg:p-12">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900">회원가입</h2>
+          <p class="mt-2 text-sm text-slate-500">
+            계정을 만들고 투두를 시작해보세요.
+          </p>
+        </div>
+        <a
+          href="/login"
+          class="text-sm font-medium text-sky-600 transition hover:text-sky-700"
+          >로그인</a
+        >
+      </div>
+
+      {% if error %}
+      <div
+        class="mt-6 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-600"
+      >
+        {{ error }}
+      </div>
+      {% endif %}
+
+      <form class="mt-8 space-y-5" method="post" action="/signup">
+        <div>
+          <label
+            for="username"
+            class="mb-2 block text-sm font-medium text-slate-700"
+            >이름</label
+          >
+          <input
+            id="username"
+            name="username"
+            type="text"
+            required
+            class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-100"
+            placeholder="예: 김투두"
+          />
+        </div>
+
+        <div>
+          <label
+            for="email"
+            class="mb-2 block text-sm font-medium text-slate-700"
+            >이메일</label
+          >
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-100"
+            placeholder="email@example.com"
+          />
+        </div>
+
+        <div>
+          <label
+            for="password"
+            class="mb-2 block text-sm font-medium text-slate-700"
+            >비밀번호</label
+          >
+          <input
+            id="password"
+            name="password"
+            type="password"
+            required
+            class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-100"
+            placeholder="8자 이상 입력해주세요"
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="w-full rounded-2xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+        >
+          회원가입하기
+        </button>
+      </form>
+
+      <p class="mt-6 text-center text-sm text-slate-500">
+        이미 계정이 있나요?
+        <a
+          href="/login"
+          class="ml-1 font-medium text-sky-600 transition hover:text-sky-700"
+          >로그인</a
+        >
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}
