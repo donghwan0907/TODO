@@ -1,10 +1,10 @@
-﻿import os
+import os
 import bcrypt
 from dotenv import load_dotenv
 from fastapi import FastAPI, Request, Depends
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
-from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
@@ -43,6 +43,7 @@ app.add_middleware(SessionMiddleware, secret_key="secret-key")
 class Memo(Base):
     __tablename__ = "memos"
     id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
     title = Column(String)
     content = Column(String)
 
@@ -155,7 +156,7 @@ def memo_write(request: Request):
 # 메모조회
 @app.get("/memos")
 def read_memos(request: Request, db: Session = Depends(get_db)):
-    memos = db.query(Memo).all()
+    memos = db.query(Memo).order_by(Memo.id.asc()).all()
     accept_header = request.headers.get("accept", "")
 
     if "application/json" in accept_header:
